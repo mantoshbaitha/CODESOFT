@@ -1,0 +1,59 @@
+# Simple Task Organizer
+
+class TaskList:
+    def __init__(self):
+        self.tasks = []
+
+    def show_tasks(self):
+        
+        if not self.tasks:
+            print("\nNo tasks found!")
+        else:
+            print("\nTask List:")
+            for i, task in enumerate(self.tasks, start=1):
+                print(f"{i}) {task}")
+
+    def add_task(self):
+      
+        task = input("Enter new task: ").strip()
+        if task:
+            self.tasks.append(task)
+            print("Task added successfully!")
+        else:
+            print("Cannot add an empty task!")
+
+    def remove_task(self):
+        
+        self.show_tasks()
+        if self.tasks:
+            try:
+                num = int(input("Enter task number to delete: "))
+                if 1 <= num <= len(self.tasks):
+                    removed_task = self.tasks.pop(num - 1)
+                    print(f"Deleted: {removed_task}")
+                else:
+                    print("Number out of range!")
+            except ValueError:
+                print("Enter a number!")
+
+def main():
+    todo = TaskList()
+
+    while True:
+        print("\nOptions: 1) Show  2) Add  3) Remove  4) Exit")
+        option = input("Choose: ").strip()
+
+        if option == "1":
+            todo.show_tasks()
+        elif option == "2":
+            todo.add_task()
+        elif option == "3":
+            todo.remove_task()
+        elif option == "4":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid option!")
+
+if __name__ == "__main__":
+    main()
